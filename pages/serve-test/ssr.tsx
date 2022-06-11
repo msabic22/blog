@@ -1,19 +1,30 @@
 import React from 'react'
 import { GetServerSideProps, NextPage } from 'next'
-import UniTable, { fetchUnis, Uni } from '../components/UniTable/UniTable'
+import UniversitiesTable, {
+    fetchUninversities,
+    University,
+} from '../components/UniversityTable/UniversityTable'
 
 export const getServerSideProps: GetServerSideProps = async () => {
-    const unis = await fetchUnis()
+    const universities = await fetchUninversities()
 
     return {
         props: {
-            unis: unis,
+            universities,
         },
     }
 }
 
-const Ssr: NextPage<{ unis: Uni[] }> = ({ unis }) => {
-    return <>{unis && <UniTable unis={unis}></UniTable>}</>
+const Ssr: NextPage<{ universities: University[] }> = ({ universities }) => {
+    return (
+        <>
+            {universities && (
+                <UniversitiesTable
+                    universities={universities}
+                ></UniversitiesTable>
+            )}
+        </>
+    )
 }
 
 export default Ssr

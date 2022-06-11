@@ -1,14 +1,26 @@
 import { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
-import UniTable, { fetchUnis, Uni } from '../components/UniTable/UniTable'
+import UniversitiesTable, {
+    fetchUninversities,
+    University,
+} from '../components/UniversityTable/UniversityTable'
 
 const Csr: NextPage = () => {
-    const [unis, setUnis] = useState<Uni[]>()
+    const [universities, setUniversities] = useState<University[]>() // U stateu
+
     useEffect(() => {
-        fetchUnis().then((res) => setUnis(res))
+        fetchUninversities().then((res) => setUniversities(res))
     }, [])
 
-    return <>{unis && <UniTable unis={unis}></UniTable>}</>
+    return (
+        <>
+            {universities && (
+                <UniversitiesTable
+                    universities={universities}
+                ></UniversitiesTable>
+            )}
+        </>
+    )
 }
 
 export default Csr
